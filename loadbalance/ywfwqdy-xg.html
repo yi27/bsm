@@ -1,0 +1,439 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="../styles/blue-theme.css" rel="stylesheet" type="text/css">
+        <link href="../styles/bootstrap.css" rel="stylesheet" type="text/css">
+
+        <link href="../styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+  </head><body class="all-bg">
+    <div class="section">
+      <div class="container">
+        <div class="">
+          <h2 class="small-h2">配置：业务服务器定义-修改</h2>
+        </div>
+      </div>
+      <div class="section">
+        <div class="container">
+          <div class="">
+
+            <div class="col-md-12">
+            <form action="ywfwqdy-editconf.php" id="_form" method="post" accept-charset="utf-8">
+              <table class="table" style="border:1px solid #ccc">
+
+                <tbody>
+                  <tr>
+                    <input type="hidden" name="serid" value="<?php echo $serid ?>" placeholder="">
+                    <td rowspan="10" class="light-gray font-weight" style="vertical-align:middle;text-align:center">业务服务器定义</td>
+                    <td class="light-blue text-right">所属负载均衡组ID：</td>
+                    <td><select class="form-control" id="groupchange" name="groupid">
+                    <?php foreach ($data_lbgroup as $k => $v) :?>
+                    <option <?php if($v['groupid']==$info_vip['groupid']){echo "selected='selected'";} ?>><?php echo $v['groupid']?></option>
+                    <?php endforeach ;?>
+                    </select></td>
+                    <td class="light-blue text-right">所属负载均衡组名称：</td>
+                    <td class="light-gray border-right" id="groupname"><?php echo $info_lbgroup_self['groupname']?></td>
+
+
+                  </tr>
+                  <tr>
+                    <td class="light-blue text-right">所属负载均衡组类型：</td>
+                    <td class="light-gray" id="grouptype"><?php if($info_lbgroup_self['grouptype'] == '1'){echo "主备";}elseif($info_lbgroup_self['grouptype'] == '2'){echo "集群";} ?></td>
+                    <td class="light-blue text-right">负载均衡器数量： </td>
+                    <td class="light-gray" id="countlb"><?php echo $info_lbcount_self[0]?></td>
+                  </tr>
+                   <tr>
+                    <td class="light-blue text-right">业务服务名称：</td>
+                    <td><input type="text" class="form-control" name="sername" value="<?php echo $info_vip['sername']?>"></td>
+                    <td class="" colspan="2"></td>
+
+                  </tr> <tr>
+                    <td class="light-blue text-right">业务服务IP(VIP)：</td>
+                   <td><input type="text" class="form-control" name="virtual_server" value="<?php echo $info_vip['virtual_server']?>"></td>
+                    <td class="light-blue text-right">服务端口：</td>
+                    <td><input type="text" class="form-control" name="virtual_server_port" value="<?php echo $info_vip['virtual_server_port']?>"></td>
+                  </tr> <tr>
+                    <td class="light-blue text-right">健康检查间隔（秒）:</td>
+
+                    <td><input type="text" class="form-control" name="delay_loop"  value="<?php echo $info_vip['delay_loop']?>" placeholder="可输入数字"></td>
+                    <td colspan="2"></td>
+
+                  </tr> <tr>
+                    <td class="light-blue text-right">调度算法：</td>
+                    <td>
+                    <select name="lb_algo" class="form-control">
+
+                    <option value="rr" <?php if($info_vip['lb_algo']=='rr'){echo "selected='selected'";} ?>>rr轮询</option>
+                    <option value="wrr"<?php if($info_vip['lb_algo']=='wrr'){echo "selected='selected'";} ?>>wrr加权轮询</option>
+                    <option value="dh"<?php if($info_vip['lb_algo']=='dh'){echo "selected='selected'";} ?>>dh目标地址hash</option>
+                    <option value="sh"<?php if($info_vip['lb_algo']=='sh'){echo "selected='selected'";} ?>>sh源地址hash</option>
+                    <option value="lc"<?php if($info_vip['lb_algo']=='lc'){echo "selected='selected'";} ?>>lc最少连接</option>
+                    <option value="wlc"<?php if($info_vip['lb_algo']=='wlc'){echo "selected='selected'";} ?>>wlc加权最少连接</option>
+                    <option value="sed"<?php if($info_vip['lb_algo']=='sed'){echo "selected='selected'";} ?>>sed最少期望延迟</option>
+                    <option value="nq"<?php if($info_vip['lb_algo']=='nq'){echo "selected='selected'";} ?>>nq从不排队调度方法</option>
+                    <option value="lblc"<?php if($info_vip['lb_algo']=='lblc'){echo "selected='selected'";} ?>>lblc基于本地的最少连接</option>
+
+                    <option value="lblcr"<?php if($info_vip['lb_algo']=='lblcr'){echo "selected='selected'";} ?>>lblcr带复制的基于本地的最少连接</option>
+                    </select>
+</td>
+
+
+                    <td class="light-blue text-right">转发规则：</td>
+                    <td><select name="lb_kind" id="_suptramode" class="form-control">
+
+                      <!--<option value="DR" id="_DR" <?php if(in_array('DR',$info_vip['lb_kind'])){echo "selected='selected' display='block'";}else{echo "style='display:none'";} ?>>路由</option>
+                      <option value="NAT" id="_NAT" <?php if(in_array('NAT',$info_vip['lb_kind'])){echo "selected='selected' display='block'";}else{echo "style='display:none'";} ?>>NAT</option>
+                      <option value="FNAT" id="_FNAT" <?php if(in_array('FNAT',$info_vip['lb_kind'])){echo "selected='selected' display='block'";}else{echo "style='display:none'";} ?>>全NAT</option>-->
+                        <option value="DR" id="_DR" <?php if($info_vip['lb_kind']=='DR'){echo "selected='selected' display='block'";}elseif(in_array('DR',$data_lbgroup[0]['suptramode'])){echo "style='display:block'";}else{echo "style='display:none'";} ?>>路由</option>
+                        <option value="NAT" id="_NAT" <?php if($info_vip['lb_kind']=='NAT'){echo "selected='selected' display='block'";}elseif(in_array('NAT',$data_lbgroup[0]['suptramode'])){echo "style='display:block'";}else{echo "style='display:none'";} ?>>NAT</option>
+                        <option value="FNAT" id="_FNAT" <?php if($info_vip['lb_kind']=='FNAT'){echo "selected='selected' display='block'";}elseif(in_array('FNAT',$data_lbgroup[0]['suptramode'])){echo "style='display:block'";}else{echo "style='display:none'";} ?>>全NAT</option>
+                    </select></td>
+                  </tr> <tr>
+                    <td class="light-blue text-right">会话保持时间（秒）:</td>
+                     <td><input type="text" class="form-control" name="persistence_timeout" placeholder="可输入数字" value="<?php echo $info_vip['persistence_timeout']?>"></td>
+                    <td class="light-blue text-right">协议类型：</td>
+                    <td><select name="protocol" class="form-control">
+
+
+                           <option value="TCP">TCP</option>
+</select></td>
+                  </tr> <tr>
+                    <td class="light-blue text-right">防范SynFlood攻击：</td>
+                      <td><input type="checkbox" name="synflood" <?php if($info_vip['synflood']==1&&in_array('FNAT',$info_vip['lb_kind'])){echo "checked='checked'";} ?> id="_synflood"></td>
+                  <td>&nbsp;</td>
+                    <td colspan="" class="border-bottom">&nbsp;</td>
+                  </tr> <tr id="_dr_message">
+                    <td class="light-blue text-right">业务系统需执行脚本：</td>
+                  <td>
+<a href="#">点击rs.sh下载</a></td>
+                 <td>&nbsp;</td>   <td class="border-bottom">&nbsp;</td>
+
+                  </tr> <tr id="_nat_message">
+                      <td class="light-blue text-right border-bottom">业务系统需指向网关：</td>
+                     <td id="_nat_ip" class="border-bottom"><?php echo $info_lbcount_self[1]?></td>
+                     <td class="border-bottom"></td> <td class="border-bottom"></td>
+                  </tr>
+                  <tr>
+                      <td class="light-blue text-right border-bottom">最后操作时间</td>
+                      <td><?php echo $info_vip['optlasttime'];?></td>
+                      <td class="light-blue text-right border-bottom">最后操作人员</td>
+                      <td><?php echo $info_vip['optlastname'];?></td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table" style="border:1px solid #ccc">
+
+                <tbody>
+                  <tr class="light-blue">
+                    <td rowspan="100" class="light-gray font-weight border-right" style="vertical-align:middle;text-align:center">源主机定义</td>
+                    <td class="text-center border-right">主机IP</td>
+                    <td class="text-center border-right">主机端口</td>
+                    <td class="text-center border-right">主机权重</td>
+                    <td class="text-center border-right">检查方式</td>
+                    <td class="text-center">操作</td>
+
+                  </tr>
+                  <?php if($data_rs) { ?>
+                  <?php foreach($data_rs as $rs_k => $rs_v) :?>
+                  <?php if($rs_k===0){ ?>
+                  <tr>
+                <td class="border-bottom border-right"><input type="text" class="form-control" placeholder="XXX.XXX.XXX.XXX" name="real_server[]" value="<?php echo $rs_v['real_server'] ?>"></td>
+                    <td class="border-bottom border-right"><input type="text" class="form-control" placeholder="可输入数字" name="real_server_port[]" value="<?php echo $rs_v['real_server_port'] ?>"></td>
+                    <td class="border-bottom border-right"><input type="text" class="form-control" placeholder="可输入数字，最高100" name="weight[]" value="<?php echo $rs_v['weight'] ?>"></td>
+                    <td class="border-bottom border-right"><select name="select" class="form-control" name="check_type">
+                      <option value="TCP_CHECK">TCP_CHECK</option>
+
+
+                    </select></td>
+
+                    <td class="border-bottom border-right" id="addspan"><a class="btn btn-primary" href="javascript:;" onclick="copyRow(this)">+</a></td>
+
+                  </tr>
+                  <?php }else{ ?>
+
+                  <tr>
+                <td class="border-bottom border-right"><input type="text" class="form-control" placeholder="XXX.XXX.XXX.XXX" name="real_server[]" value="<?php echo $rs_v['real_server'] ?>"></td>
+                    <td class="border-bottom border-right"><input type="text" class="form-control" placeholder="可输入数字" name="real_server_port[]" value="<?php echo $rs_v['real_server_port'] ?>"></td>
+                    <td class="border-bottom border-right"><input type="text" class="form-control" placeholder="可输入数字，最高100" name="weight[]" value="<?php echo $rs_v['weight'] ?>"></td>
+                    <td class="border-bottom border-right"><select name="select" class="form-control" name="check_type">
+                      <option value="TCP_CHECK">TCP_CHECK</option>
+
+
+                    </select></td>
+
+                    <td class="border-bottom border-right" id="addspan"><a class="btn btn-primary" href="javascript:;" onclick="copyRow(this)">-</a></td>
+
+                  </tr>
+                  <?php } ?>
+                  <?php endforeach ;?>
+                  <?php }else{ ?>
+                   <tr>
+                <td class="border-bottom border-right"><input type="text" class="form-control" placeholder="XXX.XXX.XXX.XXX" name="real_server[]" value=""></td>
+                    <td class="border-bottom border-right"><input type="text" class="form-control" placeholder="可输入数字" name="real_server_port[]" value=""></td>
+                    <td class="border-bottom border-right"><input type="text" class="form-control" placeholder="可输入数字，最高100" name="weight[]" value=""></td>
+                    <td class="border-bottom border-right"><select name="select" class="form-control" name="check_type">
+                      <option value="TCP_CHECK">TCP_CHECK</option>
+
+
+                    </select></td>
+
+                    <td class="border-bottom border-right" id="addspan"><a class="btn btn-primary" onclick="copyRow(this)">+</a></td>
+
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+              </form>
+            </div>
+             <div class="col-md-12 text-center">
+              <input type="submit" class="btn btn-primary" id="_submit" value="保存">
+              <input type="button" class="btn btn-primary" id="_cancel" value="取消并返回">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body></html>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="../js/messages_zh.min.js" type="text/javascript"></script>
+
+<script>
+  $("#_submit").click(function() {
+
+      $("#_form").submit();
+  });
+
+  $("#_cancel").click(function() {
+      location.href="ywfwqdy.php";
+  });
+
+      function copyRow(obj){
+            //增加或删除配置行
+        var _curtr = $(obj).parent().parent();
+        if(_curtr.find('a').html()=='+'){
+          var _newtr = _curtr.clone();
+            _newtr.find('a').html('-');
+            _curtr.after(_newtr);
+        }else{
+          if(confirm('确认删除？')){
+            _curtr.remove();
+          }
+
+        }
+       }
+  $("#groupchange").change(function() {
+
+      if($("#_suptramode").val()=='FNAT'){
+        $("#_synflood").attr('disabled', false);
+      }else{
+        $("#_synflood").attr('disabled', true);
+      }
+      $("input[type=checkbox]:checked").attr('checked',false);
+
+             var teamId=$(this).val();
+            $.ajax({
+                url: 'groupchange.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {groupid: teamId},
+            })
+     .done(function(msg) {
+                $("#grouptype").html(msg.grouptype);
+                $("#groupname").html(msg.groupname);
+                $("#countlb").html(msg.countlb) ;
+
+                if($.inArray("FNAT", msg.suptramode)=="-1"){
+                  $("#_FNAT").attr('disabled', true);
+                  $("#_FNAT").css({
+                    display: 'none'
+                  });
+
+
+                }else{
+                  $("#_FNAT").attr('disabled', false);
+                  $("#_FNAT").css({
+                    display: 'block'
+                  });
+                   $("#_FNAT").attr('selected', 'selected');
+                }
+                if($.inArray("NAT", msg.suptramode)=="-1"){
+                  $("#_NAT").attr('disabled', true);
+                  $("#_NAT").css({
+                    display: 'none'
+                  });
+
+                }else{
+                  $("#_NAT").attr('disabled', false);
+                  $("#_NAT").css({
+                    display: 'block'
+                  });
+                  $("#_NAT").attr('selected', 'selected');
+                }
+                if($.inArray("DR", msg.suptramode)=="-1"){
+                  $("#_DR").attr('disabled', true);
+                  $("#_DR").css({
+                    display: 'none'
+                  });
+                }else{
+                  $("#_DR").attr('disabled', false);
+                  $("#_DR").css({
+                    display: 'block'
+                  });
+                  $("#_DR").attr('selected', 'selected');
+                }
+
+      });
+        $.ajax({
+                url: 'getnatip.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {param: teamId},
+          })
+        .done(function(msg) {
+           $("#_nat_ip").html(msg.nat_ip);
+
+      if($("#_suptramode").val()=='FNAT'){
+        $("#_synflood").attr('disabled', false);
+        $("#_nat_message").css("display","none");
+        $("#_dr_message").css("display","none");
+      }else if($("#_suptramode").val()=='NAT'){
+        $("#_synflood").attr('disabled', true);
+        $("#_nat_message").css("display","");
+        $("#_nat_message").css("display","");
+        $("#_dr_message").css("display","none");
+      }else if($("#_suptramode").val()=='DR'){
+        $("#_synflood").attr('disabled', true);
+        $("#_nat_message").css("display","none");
+        $("#_dr_message").css("display","");
+      }
+      $("input[type=checkbox]:checked").attr('checked',false);
+    });
+  });
+
+
+  $(function(){
+    if($("#_suptramode").val()=='FNAT'){
+        $("#_synflood").attr('disabled', false);
+        $("#_nat_message").css("display","none");
+        $("#_dr_message").css("display","none");
+      }else if($("#_suptramode").val()=='NAT'){
+        $("#_synflood").attr('disabled', true);
+        $("#_nat_message").css("display","");
+        $("#_dr_message").css("display","none");
+      }else if($("#_suptramode").val()=='DR'){
+        $("#_synflood").attr('disabled', true);
+        $("#_nat_message").css("display","none");
+        $("#_dr_message").css("display","");
+      }
+  });
+
+
+    $("#_suptramode").change(function() {
+
+          var groupid=$("#groupchange").val();
+
+          $.ajax({
+                url: 'getnatip.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {param: groupid},
+          })
+            .done(function(msg) {
+                $("#_nat_ip").html(msg.nat_ip);
+
+      if($("#_suptramode").val()=='FNAT'){
+        $("#_synflood").attr('disabled', false);
+        $("#_nat_message").css("display","none");
+        $("#_dr_message").css("display","none");
+      }else if($("#_suptramode").val()=='NAT'){
+        $("#_synflood").attr('disabled', true);
+        $("#_nat_message").css("display","");
+        $("#_dr_message").css("display","none");
+      }else if($("#_suptramode").val()=='DR'){
+        $("#_synflood").attr('disabled', true);
+        $("#_nat_message").css("display","none");
+        $("#_dr_message").css("display","");
+      }
+      $("input[type=checkbox]:checked").attr('checked',false);
+    });
+  })
+
+</script>
+
+<script>
+
+jQuery.validator.addMethod("ip", function(value, element) {
+var ip = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+return this.optional(element) || (ip.test(value) && (RegExp.$1 < 256 && RegExp.$2 < 256 && RegExp.$3 < 256 && RegExp.$4 < 256));
+}, "Ip地址格式错误");
+
+
+jQuery.validator.addMethod("stringCheck", function(value, element) {
+    return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);
+ }, "只能包括中文字、英文字母、数字和下划线");
+
+
+</script>
+<script>
+
+
+   $(document).ready(function(){
+    $("#_form").validate({
+
+      rules:{
+        sername:{
+          required:true,
+          stringCheck:true,
+        },
+        virtual_server:{
+          required:true,
+          ip:true,
+        },
+        virtual_server_port:{
+          required:true,
+          digits:true
+        },
+        delay_loop:{
+          required:true,
+          digits:true
+        },
+        persistence_timeout:{
+          required:true,
+          digits:true
+        },
+        "real_server[]":{
+          ip:true,
+        },
+        "real_server_port[]":{
+          digits:true,
+        },
+        "weight[]":{
+          digits:true,
+          range:[1,100]
+        },
+
+      }
+    });
+  });
+</script>

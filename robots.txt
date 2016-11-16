@@ -1,0 +1,22 @@
+# If Bsm frontend is available on the internet, it is suggested to disallow
+# access to it for robots like search engine crawlers. Otherwise they may
+# overload the Bsm system without offering any benefit.
+#
+# Note that this must not be used for security reasons, as any visitor is
+# free to ignore the contents of this file or use it to know which directories
+# are supposed to be hidden.
+#
+# The following configuration should be used if Bsm frontend is installed
+# in the root directory of the web server. It will deny access to Bsm
+# frontend for all robots.
+
+User-agent: *
+Disallow: /
+
+# If Bsm frontend is installed in a subdirectory, for example "bsm", the
+# "Disallow" directive must be changed to point to that directory:
+# "Disallow: /bsm/".
+
+# It is important to make sure that the "Disallow" directory points specifically
+# to the Bsm frontend directory, since otherwise it may interfere with other
+# websites running on the same domain.

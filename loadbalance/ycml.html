@@ -1,0 +1,207 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="../styles/blue-theme.css" rel="stylesheet" type="text/css">
+    <link href="../styles/bootstrap.css" rel="stylesheet" type="text/css">
+
+    <link href="../styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+  </head><body class="all-bg">
+    <div class="section">
+      <div class="container">
+        <div class="">
+          <div class="col-md-12">
+          <h2>辅助功能：远程命令</h2>
+          </div></div></div>
+             <div class="container">
+        <div class="">
+<div class="col-md-12">
+
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td width="20%" align="right">负载均衡器：</td>
+                  <td>
+                   <select name="serid" class="input_50" style="width:100%" id="_serid">
+                    <option value="" >请选择负载均衡器</option>
+                  <?php foreach ($data_lb as $k => $v): ?>
+                    <option value="<?php echo $v['ID']?>"><?php echo $v['sername']?>(<?php echo $v['serip']?>)</option>
+                  <?php endforeach ;?>
+                  </select>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">命令类型：</td>
+                  <td>
+                  <select name="ordertype" class="input_50" style="width:100%" id="_ordertype">
+                  <?php foreach ($data_reorder as $k=>$v) :?>
+                    <option value="<?php echo $v['ordertype'] ?>"><?php echo $v['ordertype'] ?></option>
+                  <?php endforeach ;?>
+                  </select>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">命令参数定义：</td>
+                  <td>
+                    <input class="form-control" id="_editcfg" placeholder="命令参数"
+                    type="text" name="editcfg">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">命令执行结果：</td>
+                  <td>
+                    <textarea id="_result" name="" cols="110" rows="20"></textarea>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr>
+           <div class="col-md-12 text-center">
+            <input type="button" id="_action" value="执行命令"  class="btn btn-primary">
+          </div>
+           </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</body></html>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/layer-v3.0.1/layer/layer.js" type="text/javascript"></script>
+<script>
+/*      /!**
+ * 等待提示弹窗
+ * 使用方法:
+ * 开启:MaskUtil.mask();
+ * 关闭:MaskUtil.unmask();
+ *
+ * MaskUtil.mask('其它提示文字...');
+ *!/
+// MaskUtil Start
+var MaskUtil = (function(){
+
+    var $mask,$maskMsg;
+
+    var defMsg = '正在处理，请稍待。。。';
+
+    function init(){
+        if(!$mask){
+            $mask = $("<div></div>")
+            .css({
+              'position' : 'absolute'
+              ,'left' : '0'
+              ,'top' : '0'
+              ,'width' : '100%'
+              ,'height' : '100%'
+              ,'opacity' : '0.3'
+              ,'filter' : 'alpha(opacity=30)'
+              ,'display' : 'none'
+              ,'background-color': '#ccc'
+            })
+            .appendTo("body");
+        }
+        if(!$maskMsg){
+            $maskMsg = $("<div></div>")
+                .css({
+                  'position': 'absolute'
+                  ,'top': '50%'
+                  ,'margin-top': '-180px'
+                  ,'padding': '5px 20px 5px 20px'
+                  ,'width': 'auto'
+                  ,'border-width': '1px'
+                  ,'border-style': 'solid'
+                  ,'display': 'none'
+                  ,'background-color': '#ffffff'
+                  ,'font-size':'14px'
+                })
+                .appendTo("body");
+        }
+
+        $mask.css({width:"100%",height:$(document).height()});
+
+        var scrollTop = $(document.body).scrollTop();
+
+        $maskMsg.css({
+            left:( $(document.body).outerWidth(true) - 190 ) / 2
+            ,top:( ($(window).height() - 1) / 2 ) + scrollTop
+        });
+
+    }
+
+    return {
+        mask:function(msg){
+            init();
+            $mask.show();
+            $maskMsg.html(msg||defMsg).show();
+        }
+        ,unmask:function(){
+            $mask.hide();
+            $maskMsg.hide();
+        }
+    }
+
+}());
+// MaskUtil End*/
+
+
+
+        $("#_action").click(function() {
+              var serid = $("#_serid").val();
+              var ordertype = $("#_ordertype").val();
+              var editcfg = $("#_editcfg").val();
+              $.ajax({
+                          url: 'ycmlconf.php',
+                          type: 'POST',
+                          dataType: 'json',
+                          data: {
+                              param: serid,
+                              param1:ordertype,
+                              param2:editcfg,
+                          },
+                          beforeSend(){
+                              layer.msg('加载中');
+                              layer.load(2);
+                              //setTimeout(layer.close(layer.load()),10000000);
+                          }
+
+                      })
+                      .done(function(msg) {
+                          layer.close(layer.load());
+                          if(msg=="1"){
+                              layer.alert("命令含有非法字符！请检查！",function(){location.replace(location.href);});
+                          }else if(msg=="3"){
+                              layer.alert('请选择要执行命令的负载均衡器！！！');
+                          }else if(msg=="2"){
+                              layer.alert("该负载均衡器无法链接！请检查后再试！");
+                          }else if(msg=="4"){
+                              layer.alert("命令无效！请检查后再试！");
+                          }else{
+                                  $('#_result').attr("readonly","readonly");
+                                  $('#_result').val(msg);
+                          }
+                      })
+          });
+</script>

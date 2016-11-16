@@ -1,0 +1,263 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="../js/jquery.js" type="text/javascript"></script>
+
+  <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="../styles/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="../styles/blue-theme.css" rel="stylesheet" type="text/css">
+    <link href="../styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+  </head><body class="all-bg">
+    <div class="section">
+      <div class="container">
+        <div class="">
+          <div class="">
+            <h2 class="small-h2">配置：负载均衡器管理-修改</h2>
+          </div>
+
+
+          <form action="fzjhqgl-editconf.php" method="post" id="_form" accept-charset="utf-8">
+
+            <table class="table" style="border:1px solid #ccc">
+
+              <tbody>
+                <tr>
+                  <td rowspan="5" class="light-gray text-center font-weight" style="vertical-align:middle;border-right:1px solid #ccc">服务器配置</td>
+                  <td class="light-blue text-right">负载均衡器名称：</td>
+                  <td>
+                    <input class="form-control" name="sername" value="<?php echo $info_lb['sername'] ?>" placeholder="可输入中文、英文、数字" type="text">
+                  </td>
+                  <td><span class="red">*</span><span id="_sernamespan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+                </tr>
+                   <tr>
+                  <td class="light-blue text-right">负载均衡器IP：</td>
+                  <td>  <input class="form-control" name="serip" value="<?php echo $info_lb['serip'] ?>" placeholder="XXX.XXX.XXX.XXX" type="text"></td>
+                  <td><span class="red">*</span><span id="_seripspan"></span></td>
+
+                </tr>   <tr>
+                  <td class="light-blue text-right">SSH链接端口：</td>
+                  <td> <input class="form-control" name="sersshport" value="<?php echo $info_lb['sersshport'] ?>" placeholder="默认22，请输入数" type="text"></td>
+                  <td><span class="red">*</span><span id="_sersshportspan"></span></td>
+
+                </tr>   <tr>
+                  <td class="light-blue text-right">链接账号：</td>
+                  <td> <input class="form-control" name="sersshacc" value="<?php echo $info_lb['sersshacc'] ?>" placeholder="请输入账号" type="text"></td>
+                  <td><span class="red">*</span><span id="_sersshaccspan"></span></td>
+
+                </tr>   <tr>
+                  <td class="light-blue text-right">链接密码：</td>
+                  <td> <input class="form-control" name="sersshpwd" value="<?php echo 'huitone123456<>' ?>" placeholder="请输入密码" type="password"></td>
+                  <td><span class="red">*</span><span id="_sersshpwdspan"></span></td>
+
+                </tr>
+                <tr>
+                  <td rowspan="6" class="light-gray text-center font-weight" style="vertical-align:middle;border-right:1px solid #ccc">IP登记</td>
+                  <td class="light-blue text-right">eth0（主IP）：</td>
+                  <td> <input class="form-control" name="eth0ip" value="<?php echo $info_lb['eth0ip'] ?>" placeholder="XXX.XXX.XXX.XXX" type="text"></td>
+                  <td><span class="red">*</span><span id="_eht0ipspan"></span></td>
+                </tr>
+                <tr>
+                  <td class="light-blue text-right">eth0（主IP子网掩码）：</td>
+
+                  <td> <input class="form-control" name="eth0ipmask" value="<?php echo $info_lb['eth0ipmask'] ?>" placeholder="255.255.255.0" type="text"></td>
+                  <td><span class="red">*</span><span id="_eth0ipmaskspan"></span></td>
+                </tr>
+                   <tr>
+                  <td class="light-blue text-right">eth1（主IP）：</td>
+
+                  <td> <input class="form-control" name="eth1ip" value="<?php echo $info_lb['eth1ip'] ?>" placeholder="XXX.XXX.XXX.XXX" type="text"></td>
+                  <td><span class="red">*</span><span id="_eht1ipspan"></span></td>
+                </tr>
+                   <tr>
+                  <td class="light-blue text-right">eth1（主IP子网掩码）：</td>
+
+                  <td> <input class="form-control" name="eth1ipmask" value="<?php echo $info_lb['eth1ipmask'] ?>" placeholder="255.255.255.0" type="text"></td>
+                  <td><span class="red">*</span><span id="_eth1ipmaskspan"></span></td>
+                </tr>
+                   <tr>
+                  <td class="light-blue text-right">eth1（NAT模式网关）：</td>
+
+                  <td> <input class="form-control" name="nat_ip" value="<?php echo $info_lb['nat_ip'] ?>" placeholder="XXX.XXX.XXX.XXX" type="text"></td>
+                  <td><span class="red">*</span><span id="_nat_ipspan"></span></td>
+                </tr>
+                   <tr>
+                  <td class="light-blue text-right">eth1（全NAT模式本地IP）：</td>
+
+                  <td> <input class="form-control" name="FNAT_ip" value="<?php echo $info_lb['FNAT_ip'] ?>" placeholder="如有多个IP，用;隔开。示意XXX.XXX.XXX.XXX;XXX.XXX.XXX.XXX" type="text"></td>
+                  <td><span class="red">*</span><span id="_fnat_ipspan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+                  <input type="hidden" name="serid" value="<?php echo $info_lb['ID'] ?>">
+                </tr>
+
+                   <tr>
+                   <td rowspan="2" class="text-center light-gray border-right font-weight" style="vertical-align:middle;">操作信息</td>
+                  <td class="light-blue text-right">最后操作时间：</td>
+                   <td> <input class="form-control" readonly="readonly" name="optlasttime" value="<?php echo $info_lb['optlasttime'] ?>" placeholder="" type="text"></td>
+                    <td>&nbsp; </td>
+
+                </tr>
+                   <tr>
+                  <td class="light-blue text-right">最后操作人员：</td>
+                   <td> <input class="form-control" readonly="readonly" name="optlastname" value="<?php echo $info_lb['optlastname'] ?>" placeholder="" type="text"></td>
+                   <td>&nbsp; </td>
+
+                </tr>
+                   <tr>
+                  <td class="text-center light-gray font-weight border-right" style="vertical-align:middle;" rowspan="4">其他信息</td>
+                  <td class="light-blue text-right">归属组最后配置时间：</td>
+                   <td> <input class="form-control" readonly="readonly" name="ingroupidlasttime" value="<?php echo $info_lb['ingroupidlasttime'] ?>" placeholder="无" type="text"></td>
+                  <td>&nbsp;</td>
+
+                </tr>
+                <tr>
+
+                  <td class="light-blue text-right">已生效的配置文件时间：</td>
+                   <td> <input class="form-control" readonly="readonly" name="cfgefflasttime" value="<?php echo $info_lb['cfgefflasttime'] ?>" placeholder="无" type="text"></td>
+                  <td>&nbsp; </td>
+
+                </tr>
+                  <tr class="border-bottom">
+
+                    <td class="light-blue text-right">当前配置文件状：</td>
+                    <td> <input class="form-control" readonly="readonly" name="cfgstatus" value="<?php  if($info_lb['cfgstatus']==0){echo '无配置';}elseif($info_lb['cfgstatus']==1){echo '待执行配置';}elseif($info_lb['cfgstatus']==2){echo '待取消配置';}elseif($info_lb['cfgstatus']==3){echo '已生效';} ?>" placeholder="无配置" type="text"></td>
+                    <td>&nbsp;</td>
+
+                </tr>
+              </tbody>
+            </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="text-left">
+          <div class="col-md-12 notice">
+            <p>备注：1 IP登记，请登记网络管理员已分配并在负载均衡器设置的IP地址；其中eth0为链接外网的网卡，eth1为链接后端的网卡，eth1（NAT模式网关）不
+              可与eth1（主IP一致），eth1（全NAT模式本地IP）可包含eth1（主IP）。</p>
+            <p>2 负载均衡组中主备支持“路由、NAT、全NAT”三种转发模式、集群支持“路由、全NAT”两种转发模式，其中如eth1（NAT模式网关）、eth2（全NAT模式本地IP）内容没有填写，则对应模式将无法部署；相关模式的数据包通讯简介如下：</p>
+            <p>(1) 路由模式：其中用户访问的“对外业务服务IP”、“负载均衡器”跟“业务服务器”的通讯都是由负载均衡器的eth0网卡承接，最后由“业务服务器”自行返回请求给用户。
+              【该模式需要“业务服务器”可访问公网；同时“业务服务器”需要执行部分网络配置命令（“业务服务器定义”功能中有详述）】。</p>
+            <p>(2) NAT模式：其中用户访问“对外业务服务IP”，“负载均衡器”通过eth0接收该数据请求，并通过eth1提交给“业务服务器”，“业务服务器”再返回数据给“负载均衡器”eth1，由"负载均衡器"返回给用户；其中“业务服务器”需要新增默认路由到本次新增的【eth1（NAT模式网关）】中。【该模式需要“负载均衡器”跟“业务服务器”在同一个局域网内】</p>
+            <p>(3) 全NAT模式：其中用户访问“对外业务服务IP”，“负载均衡器”通过eth0接收该数据请求，并通过eth1的1或多IP提交给“业务服务器”，“业务服务器”再返回数据给“负载均衡器”eth1，由“负载均衡器”返回给用户。【该模式中，“业务服务器”不需要做任何变动】</p>
+          </div>
+        </div>
+        <div class="text-center">
+          <input type="submit" class="btn btn-primary" id="_submit" value="保存">
+          <input type="submit" class="btn btn-primary" id="_cancel" value="取消并返回">
+        </div>
+      </div>
+    </div>
+
+
+</body></html>
+
+
+<script src="../js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="../js/messages_zh.min.js" type="text/javascript"></script>
+
+<script>
+    $("#_submit").click(function() {
+      $("#_form").submit();
+
+  });
+
+  $("#_cancel").click(function() {
+    self.location=document.referrer;
+  });
+
+</script>
+<script>
+
+jQuery.validator.addMethod("ip", function(value, element) {
+var ip = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+return this.optional(element) || (ip.test(value) && (RegExp.$1 < 256 && RegExp.$2 < 256 && RegExp.$3 < 256 && RegExp.$4 < 256));
+}, "Ip地址格式错误");
+
+jQuery.validator.addMethod("fnat_ip", function(value, element) {
+var ip = /^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?);?)*$/;
+return this.optional(element) || (ip.test(value));
+}, "Ip地址格式错误");
+
+jQuery.validator.addMethod("stringCheck", function(value, element) {
+    return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);
+ }, "只能包括中文字、英文字母、数字和下划线");
+
+
+</script>
+<script>
+
+
+   $(document).ready(function(){
+    $("#_form").validate({
+
+      rules:{
+        sername:{
+          required:true,
+          stringCheck:true,
+        },
+        serip:{
+          required:true,
+          ip:true,
+        },
+        sersshacc:{
+          required:true,
+        },
+        sersshpwd:{
+          required:true,
+
+        },
+        sersshport:{
+          required:true,
+          digits:true
+        },
+        eth0ip:{
+          required:true,
+          ip:true
+        },
+        eth1ip:{
+          required:true,
+          ip:true
+        },
+        eth0ipmask:{
+          required:true,
+          digits:true,
+          range:[1,32]
+        },
+        eth1ipmask:{
+          required:true,
+          digits:true,
+          range:[1,32]
+        },
+        nat_ip:{
+          required:true,
+          ip:true
+        },
+        FNAT_ip:{
+          required:true,
+          fnat_ip:true,
+        },
+
+      }
+    });
+  });
+</script>

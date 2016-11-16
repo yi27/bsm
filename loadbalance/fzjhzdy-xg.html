@@ -1,0 +1,341 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="../styles/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../styles/blue-theme.css" rel="stylesheet" type="text/css">
+    <link href="../styles/style.css" rel="stylesheet" type="text/css">
+   <style>
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+  </head><body class="all-bg">
+    <div class="section">
+      <div class="container">
+        <div class="">
+          <h2 class="small-h2">配置：负载均衡组定义-修改</h2>
+        </div>
+      </div>
+      <div class="section">
+        <div class="container">
+          <div class="">
+            <div class="">
+            <form action="fzjhzdy-editconf.php" method="post" id="_form" accept-charset="utf-8">
+              <table class="table" border="1" style="border:1px solid #ccc">
+                <tbody>
+                  <tr>
+                    <td rowspan="5" class="light-gray text-center font-weight" style="vertical-align:middle;">组定义</td>
+                    <td class="light-blue text-right text-right">组ID：</td>
+                    <td><?php echo $info_lbgroup['groupid']?></td>
+                    <input type="hidden" name="groupid" value="<?php echo $info_lbgroup['groupid']?>">
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="light-blue text-right text-right">组名称：</td>
+                    <td>
+                      <input class="form-control" placeholder="组名称" type="text" name="groupname" value="<?php echo $info_lbgroup['groupname']?>">
+                    </td>
+
+                    <td class="light-blue text-right">组类型：</td>
+                    <td>
+                     <select name="grouptype" id="_grouptype" class="form-control" >
+                       <option value="1" <?php if($info_lbgroup['grouptype']==1){echo "selected='selected'";} ?> >主备</option>
+                       <option value="2" <?php if($info_lbgroup['grouptype']==2){echo "selected='selected'";} ?> >集群</option>
+                     </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="light-blue text-right" style="vertical-align:middle">支持的转发模式：</td>
+                    <td colspan="3">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="suptramode[DR]" value="DR" <?php if(in_array('DR',$suptramode)){echo "checked='checked'";} ?> >路由</label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="suptramode[NAT]" id="_nat"  value="NAT"  <?php if(in_array('NAT',$suptramode)){echo "checked='checked'";} ?> >NAT</label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="suptramode[FNAT]" value="FNAT"  <?php if(in_array('FNAT',$suptramode)){echo "checked='checked'";} ?> >全NAT</label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="light-blue text-right">负载均衡器：</td>
+                    <td colspan="3"><?php foreach ($data_lb as $k => $v) :?><?php echo $v['sername'].';'?><?php endforeach ;?></td>
+                  </tr>
+                  <tr>
+                    <td class="light-blue text-right">最后操作时间：</td>
+                    <td><?php echo $info_lbgroup['optlasttime']?></td>
+                    <td class="light-blue text-right">最后操作人员：</td>
+                    <td><?php echo $info_lbgroup['optlastname']?></td>
+                  </tr>
+                  <tr>
+                    <td class="light-gray font-weight text-center" style="border-right:1px solid #ccc">其它信息</td>
+                    <td class="light-blue text-right">业务服务名称：</td>
+                    <td colspan="3"><?php foreach ($data_vip as $k1 => $v1) :?><?php echo $v1['sername'].';'?><?php endforeach ;?></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-12 notice">
+            <h4>请选择并新增负载均衡器，相关注意事项：</h4>
+            <p>1所选的负载均衡器需在同一个网络中。</p>
+            <p>2.请确保同组负载均衡器的eth1（NAT模式网关）的ip一致；eth1（全NAT模式本地地址）的IP均不同；若无需NAT与全NAT两种转发模式，则本条信息可忽略。</p>
+            <p>3.如果为主备模式，则仅可以选择一台负载均衡器为主要机器；其它均是备用。同时最多仅3台。</p>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="">
+          <div class="">
+            <table class="table" border="1" style="border:1px solid #ccc">
+              <tbody>
+                <tr>
+                  <td rowspan="2000" class="border-right" style="vertical-align:middle;">负载均衡器修改</td>
+                  <td class="border-right" >选择</td>
+                  <td class="border-right" >负载均衡器名称</td>
+                  <td class="border-right" >负载均衡器IP</td>
+                  <td class="border-right" >归属组</td>
+                  <td class="border-right" >eth1（NAT模式网关）</td>
+                  <td class="border-right" >eth1（全NAT模式本地地址）</td>
+                  <td>是否为主要</td>
+                </tr>
+                <?php foreach ($data_lb_all as $ka => $va) :?>
+                <tr >
+
+                  <td class="border-bottom border-right"><input class="lb_checkbox" type="checkbox" name="lb_id[]" value="<?php echo $va['ID']?>" <?php if($va['groupid']!=0){echo "checked='checked'";} ?>></td>
+                  <td class="border-bottom border-right"><?php echo $va['sername']?></td>
+                  <td class="border-bottom border-right"><?php echo $va['serip']?></td>
+                  <td class="border-bottom border-right"><?php echo $va['groupid']?></td>
+                  <td class="border-bottom border-right"><?php echo $va['nat_ip']?></td>
+                  <td class="border-bottom border-right"><?php echo $va['FNAT_ip']?></td>
+                  <td class="border-bottom"><input type="radio" class="lb_radio" name="isMASTER" value="<?php echo $va['ID']?>" <?php if($va['state']=='MASTER' && $va['groupid']!=0){echo "checked='checked',disabled='false'";} ?> ></td>
+
+                </tr>
+              <?php endforeach ;?>
+              </tbody>
+            </table>
+          </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 text-center">
+      <input type="submit" class="btn btn-primary" id="_submit" value="保存">
+      <input type="submit" class="btn btn-primary" id="_cancel" value="取消并返回">
+    </div>
+
+
+</body></html>
+
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="../js/messages_zh.min.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function() {
+
+        $(".lb_radio").change(function(){
+
+            $(this).parent().parent().find(".lb_checkbox").attr('checked', true);
+        })
+        $(".lb_checkbox").change(function(){
+            if(!$(this).prop('checked')){
+                $(this).parent().parent().find(".lb_radio").attr('checked', false);
+
+            }
+
+        })
+
+
+        if($("#_grouptype").val()==1){
+            $(":radio").attr('disabled',true);
+            if($("input[name='lb_id[]']:checked")){
+                var a = $("input[name='lb_id[]']:checked").parent().parent();
+                a.find("input[type='radio']").attr("disabled",false);
+            }
+            $(":radio").css({
+                display: 'block'
+            });
+
+            $("#_nat").attr('disabled',false);
+
+                $("input[name='lb_id[]'").click(function() {
+                    $("input[name='lb_id[]']").attr('disabled', true);
+                    $("input[type=radio]").attr('disabled', true);
+                    var a = $("input[name='lb_id[]']:checked").parent().parent();
+                    a.find("input[type='radio']").attr("disabled",false);
+
+                    if ($("input[name='lb_id[]']:checked").length >= 3) {
+                        $("input[name='lb_id[]']:checked").attr('disabled', false);
+                        // $("input[type=radio]").attr('disabled', false);
+
+                    }else{
+                        $("input[name='lb_id[]']").attr('disabled', false);
+                    }
+
+                })
+
+        }else if($("#_grouptype").val()==2){
+            $(":radio").attr('disabled',true);
+
+            $("#_nat").attr('disabled',true);
+            $(":radio").css({
+                display: 'none'
+            });
+            $("input[name='lb_id[]']").attr('disabled', false);
+            $('input[type=checkbox]').click(function() {
+                $("input[name='lb_id[]']").attr('disabled', false);
+
+            });
+        }
+    });
+
+
+    $("#_grouptype").change(function() {
+
+        if($("#_grouptype").val()==1){
+            $(":radio").attr('disabled',true);
+            $("input[type=checkbox]:checked").attr('checked',false);
+            $("input[type=radio]:checked").attr('checked',false);
+            $("#_nat").attr('disabled',false);
+
+            $("input[name='lb_id[]'").click(function() {
+                $("input[name='lb_id[]']").attr('disabled', true);
+                $("input[type=radio]").attr('disabled', true);
+                var a = $("input[name='lb_id[]']:checked").parent().parent();
+                a.find("input[type='radio']").attr("disabled",false);
+
+                if ($("input[name='lb_id[]']:checked").length >= 3) {
+                    $("input[name='lb_id[]']:checked").attr('disabled', false);
+                   // $("input[type=radio]").attr('disabled', false);
+
+                }else{
+                    $("input[name='lb_id[]']").attr('disabled', false);
+                }
+
+            })
+            $(":radio").css({
+                display: 'block'
+            });
+            /*$("input[name='lb_id[]']").attr('disabled', false);
+            $('input[type=checkbox]').click(function() {
+                $("input[name='lb_id[]']").attr('disabled', false);
+
+            });*/
+        }else if($("#_grouptype").val()==2){
+            $(":radio").attr('disabled',false);
+            $(":radio").css({
+                display: 'none'
+            });
+            $("input[type=checkbox]:checked").attr('checked',false);
+            $("#_nat").attr('disabled',true);
+
+            $("input[name='lb_id[]']").attr('disabled', false);
+            $('input[type=checkbox]').click(function() {
+                $("input[name='lb_id[]']").attr('disabled', false);
+
+            });
+/*            $("input[name='lb_id[]'").click(function() {
+                $("input[name='lb_id[]']").attr('disabled', true);
+                if ($("input[name='lb_id[]']:checked").length >= 3) {
+                    $("input[name='lb_id[]']:checked").attr('disabled', false);
+
+                }else{
+                    $("input[name='lb_id[]']").attr('disabled', false);
+                }
+
+            })*/
+
+
+        }
+    });
+
+    $("#_submit").click(function() {
+        $("#_form").submit();
+    });
+
+
+    /*
+
+     $("#_grouptype").change(function() {
+     // 主备模式
+     if($("#_grouptype").val()==1){
+
+
+     $(":radio").attr('disabled',false);
+     $("input[type=checkbox]:checked").attr('checked',false);
+     $("#_nat").attr('disabled',false);
+     $(":radio").css({
+     display: 'block'
+     });
+     $("input[name='lb_id[]']").attr('disabled', false);
+     $('input[type=checkbox]').click(function() {
+     $("input[name='lb_id[]']").attr('disabled', false);
+
+     });
+     }else if($("#_grouptype").val()==2){
+
+     // 集群模式
+     $(":radio").attr('disabled',false);// 不显示是否为主要
+     $(":radio").css({
+     display: 'none'
+     });
+     $("input[type=checkbox]:checked").attr('checked',false);// 服务器全部不勾选
+     $("#_nat").attr('disabled',true);// 不显示nat
+
+
+
+
+
+     }
+     });
+
+     */
+
+    $("#_cancel").click(function() {
+        self.location=document.referrer;
+    });
+</script>
+
+<script >
+
+    jQuery.validator.addMethod("stringCheck", function(value, element) {
+        return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);
+    }, "只能包括中文字、英文字母、数字和下划线");
+
+</script>
+<script>
+    $(document).ready(function(){
+        $("#_form").validate({
+
+            rules:{
+                groupname:{
+                    required:true,
+                    stringCheck:true,
+                },
+            }
+        });
+    })
+
+
+</script>

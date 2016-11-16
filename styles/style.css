@@ -1,0 +1,83 @@
+/*
+* @Author: Rnb-3Ds
+* @Date:   2016-10-09 18:04:55
+* @Last Modified by:   Rnb-3Ds
+<<<<<<< .mine
+* @Last Modified time: 2016-11-16 11:29:26
+||||||| .r4425
+* @Last Modified time: 2016-10-19 16:10:15
+=======
+* @Last Modified time: 2016-10-28 11:13:01
+>>>>>>> .r4539
+*/
+.container{background:#fff;}
+.input_50{width:55%;}
+.inner-container{background: #fff;padding: 20px;overflow: hidden;}
+.left_side ul li{ line-height: 40px; height:40px;border-bottom: 1px solid #ccc;cursor:pointer;font-size:12px;}
+.left_side ul li.load_current{color:#000; font-weight: bold;}
+.left_side{ background:#f9f9f9;min-height: 450px;padding:10px 10px 10px 20px;}
+.right-box-2{display:none;}
+.right-box-3{display:none;}
+.notice{padding:10px;border:1px solid #e9e9e9;margin:10px 0px;color:#666;border-radius: 3px;background:#e7fdd6;}
+.space-4{margin:10px 0px;overflow:hidden;}
+.double_line{border-bottom:1px dashed #ccc;border-top:1px dashed #ccc;height:2px;}
+.defind_h3{height:20px;line-height:30px;text-indent:10px;}
+.all-bg{background:#fff;}
+.changered{color:red;}.pink{background:#fde6ef}
+.light-blue{background:#e3ebfd}
+.small-h2{height:62px;line-height:62px;font-size:24px;font-weight:800}
+.light-gray{background:#f9f9f9}
+.border-right{border-right:1px solid #ccc}
+.border-bottom{border-bottom:1px solid #ccc}
+.top_warm{padding:10px;border:1px solid #e9e9e9;margin:10px 0px;color:#666;border-radius: 3px; background:#fdffdf;overflow:hidden}
+.font-weight{font-weight:700}
+.ml-10{margin-left:10px}
+.guaid{height:100px;line-height:100px;font-weight:700;}
+.btn{background:#4D8CF5;color:#fff;}
+.error{color:red;}
+.white{color:#fff!important;}
+.ml-10{margin-left:10px;}
+.signin-left{background:url(../img/Zabbix_left_pic.jpg) no-repeat; width:600px;height:482px;}
+.signin-over-h1{background:url(../img/Zabbix_logo.jpg) no-repeat; width:174px; height:62px;}
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.form-control::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+  color: #999;
+}
+.form-control::-webkit-input-placeholder {
+  color: #999;
+}
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+  cursor: not-allowed;
+  background-color: #eee;
+  opacity: 1;
+}
+

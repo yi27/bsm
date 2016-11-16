@@ -1,0 +1,164 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link href="../styles/blue-theme.css" rel="stylesheet" type="text/css">
+<link href="../styles/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../styles/style.css" rel="stylesheet" type="text/css">
+<style>
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url('../fonts/glyphicons-halflings-regular.eot');
+	src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	-webkit-font-smoothing: antialiased;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-moz-osx-font-smoothing: grayscale;
+}
+</style>
+</head>
+<body class="all-bg">
+<div class="section">
+  <div class="container">
+    <div class="">
+      <h2 class="small-h2">配置：业务服务器定义</h2>
+      <form method="post" action="./ywfwqdy.php">
+      <div class="">
+        <div class="col-md-3">
+          <input class="form-control"  style="width:100%" name="groupid" placeholder="组Id" value="<?php echo $groupid1;?>" type="text">
+        </div>
+        <div class="col-md-3">
+          <input class="form-control"  style="width:100%" name="sername" placeholder="业务服务名称" value="<?php echo $sername1;?>" type="text">
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" style="width:100%" name="virtual_server" placeholder="业务服务IP(VIP)" value="<?php echo $virtual_server1;?>" type="text">
+        </div>
+
+        <div class="col-md-3"> <input class="btn" type="submit" value="搜索"></div>
+      </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>
+<div class="space-4"></div>
+<div class="container">
+  <div class="">
+    <div class="col-md-12">
+
+      <table class="table" style="border:1px solid #ccc" id="Qub_tb_List">
+        <tbody>
+          <tr class="success">
+            <td colspan="5" class="text-center font-weight" style="border-right:1px solid #ccc ">负载均衡组信息</td>
+            <td colspan="10" class="text-center font-weight">业务服务器信息</td>
+          </tr>
+          <tr class="warning">
+            <td class="border-right text-center">选择</td>
+            <td class="border-right text-center">组ID</td>
+            <td class="border-right text-center">组名称</td>
+            <td class="border-right text-center">组类型</td>
+            <td class="border-right text-center">负载均衡器数量</td>
+            <td class="border-right text-center">业务服务名称</td>
+            <td class="border-right text-center">业务服务IP（VIP）</td>
+            <td class="border-right text-center">服务端口</td>
+            <td class="border-right text-center">健康检查间隔（秒）</td>
+            <td class="border-right text-center">调度算法</td>
+            <td class="border-right text-center">转发规则</td>
+            <td class="border-right text-center">会话保持时间（秒）</td>
+            <td class="border-right text-center">协议类型</td>
+            <td class="border-right text-center">防范SynFlood攻击</td>
+            <td class="text-center">源主机数量</td>
+          </tr>
+          <?php foreach ($data_vip as $k => $v) :?>
+          <tr>
+            <td class="border-right text-center"><input type="radio" name="choice" value="<?php echo $v['ID'] ?>"></td>
+            <td class="border-right text-center"><?php echo $v['groupid'] ?></td>
+            <td class="border-right text-center"><?php echo $v['groupname'] ?></td>
+            <td class="border-right text-center"><?php if($v['grouptype'] == '1'){echo "主备";}elseif($v['grouptype'] == '2'){echo "集群";}  ?></td>
+            <td class="border-right text-center"><?php echo $v['countlb'] ?></td>
+            <td class="border-right text-center"><?php echo $v['sername'] ?></td>
+            <td class="border-right text-center"><?php echo $v['virtual_server'] ?></td>
+            <td class="border-right text-center"><?php echo $v['virtual_server_port'] ?></td>
+            <td class="border-right text-center"><?php echo $v['delay_loop'] ?></td>
+            <td class="border-right text-center"><?php echo $v['lb_algo'] ?></td>
+            <td class="border-right text-center"><?php if($v['lb_kind']=='DR'){echo '路由';}else{echo $v['lb_kind'];} ?></td>
+            <td class="border-right text-center"><?php echo $v['persistence_timeout'] ?></td>
+            <td class="border-right text-center"><?php echo $v['protocol'] ?></td>
+            <td class="border-right text-center"><?php if($v['synflood'] == '0'){echo "否";}elseif($v['synflood'] == '1'){echo "是";}  ?></td>
+            <td class="text-center"><?php echo $v['countrs'] ?></td>
+          </tr>
+          <?php endforeach ;?>
+        </tbody>
+      </table>
+      <div class="col-md-12 text-center"> <a class="btn btn-primary" target="main" onclick="window.location.href='ywfwqdy-add.php'">新增</a> <a class="btn btn-primary" target="main" id="_edit">修改</a> <a class="btn btn-primary" id="_delete">删除</a> </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/layer-v3.0.1/layer/layer.js" type="text/javascript"></script>
+<script>
+    $("#Qub_tb_List").on("click", "tr", function () {
+            var input = $(this).find("input");
+            //alert($(input).prop("checked"));
+            if (!$(input).prop("checked")) {
+                $(input).prop("checked",true);
+            }else{
+              $(input).prop("checked",false);
+            }
+      });
+
+        //多选框 防止事件冒泡
+    $("#Qub_tb_List").on("click", "input", function (event) {
+         event.stopImmediatePropagation();
+        });
+
+
+    $("#_edit").click(function() {
+      var serid = $(":radio[name=choice]:checked").val();
+
+      if(!serid){
+        layer.alert("请选择要修改的负载均衡组");
+      }else{
+        location.href="ywfwqdy-xg.php?serid="+serid+"";
+      }
+
+  });
+
+        $("#_delete").click(function() {
+          layer.confirm("您现在执行的是删除业务服务器的操作，如确认，系统将停止该业务服务器、源主机的服务！",function(){
+
+            var serid = $(":radio[name=choice]:checked").val();
+            $.ajax({
+                      url: 'ywfwqdy-del.php',
+                      type: 'POST',
+                      dataType: 'json',
+                      data: {param: serid},
+
+                    })
+                    .done(function(msg) {
+                      if(msg=="1"){
+                        layer.alert("删除成功！",function(){location.replace(location.href);});
+
+                      }else if(msg=="2"){
+                        layer.alert("删除失败！请刷新页面！",function(){location.replace(location.href);});
+
+                      }else if(msg=="3"){
+                        layer.alert('请选择要删除的负载均衡组！！！');
+                      }
+                    })
+          });
+
+        });
+</script>

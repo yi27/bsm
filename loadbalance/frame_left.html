@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+<link href="../styles/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="../styles/blue-theme.css" rel="stylesheet" type="text/css">
+<link href="../styles/style.css" rel="stylesheet" type="text/css">
+	<style>
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url('../fonts/glyphicons-halflings-regular.eot');
+	src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	-webkit-font-smoothing: antialiased;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-moz-osx-font-smoothing: grayscale;
+}
+</style>
+    <body style="width:343px!important">
+	<div class="">
+        <div class="left_side">
+
+          <ul id="Qub_tb_List">
+             <li id="czzn"><a href="czzn.html" target="main"><span class="glyphicon glyphicon-list" > </span> 操作指南</a>  </li>
+            <li class="load_current" id="fzjhqgl"><a href="fzjhqgl.php" target="main"><span class="glyphicon glyphicon-list"> </span> 配置：负载均衡器管理</a>  </li>
+            <li class="" id="fzjhzdy"> <a href="fzjhzdy.php"  target="main"><span class="glyphicon glyphicon-list"> </span> 配置：负载均衡组定义 </a></li>
+            <li id="ywfwqdy"> <a href="ywfwqdy.php" target="main"><span class="glyphicon glyphicon-list"> </span> 配置：业务服务器定义</a> </li>
+            <li id="zxfzjhcz"> <a href="zxfzjhcz.php" target="main"><span class="glyphicon glyphicon-list"> </span> 执行负载均衡操作</a> </li>
+            <li id="ycml"> <a href="ycml.php" target="main"><span class="glyphicon glyphicon-list"> </span> 辅助功能：远程命令</a></li>
+          </ul>
+        </div>
+      </div>
+    </body>
+</html>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script>
+    $("#czzn").click(function(){
+            $("ul li").attr("class",'');
+            $("#czzn").attr('class','load_current');
+            $("a",this)[0].click();//触发a链接
+      });
+    $("#fzjhqgl").click(function(){
+            $("ul li").attr("class",'');
+            $("#fzjhqgl").attr('class','load_current');
+            $("a",this)[0].click();
+    });
+    $("#fzjhzdy").click(function(){
+            $("ul li").attr("class",'');
+            $("#fzjhzdy").attr('class','load_current');
+            $("a",this)[0].click();
+    });
+    $("#ywfwqdy").click(function(){
+            $("ul li").attr("class",'');
+            $("#ywfwqdy").attr('class','load_current');
+            $("a",this)[0].click();
+    });
+    $("#zxfzjhcz").click(function(){
+            $("ul li").attr("class",'');
+            $("#zxfzjhcz").attr('class','load_current');
+            $("a",this)[0].click();
+    });
+    $("#ycml").click(function(){
+            $("ul li").attr("class",'');
+            $("#ycml").attr('class','load_current');
+            $("a",this)[0].click();
+    });
+
+    $("#Qub_tb_List").on("click", "li", function () {
+            var input = $(this).find("input");
+            //alert($(input).prop("checked"));
+            if (!$(input).prop("checked")) {
+                $(input).prop("checked",true);
+            }else{
+              $(input).prop("checked",false);
+            }
+      });
+        //多选框 防止事件冒泡
+    $("#Qub_tb_List").on("click", "input", function (event) {
+         event.stopImmediatePropagation();
+        });
+
+</script>
